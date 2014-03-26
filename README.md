@@ -1,4 +1,3 @@
-ScribeImageMagickBundle
-=======================
+# ScribeImageMagickBundle
 
-Abstraction bundle for image manipulation using the imagemagick library.
+Symfony bundle to provide an abstraction layer over the PHP IMagick library with higher-level, reusable functionality.

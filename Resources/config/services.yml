@@ -1,0 +1,16 @@
+parameters:
+
+    s.imagemagick.instance.class: Scribe\ImageMagickBundle\Component\ImageMagick
+    s.imagemagick.factory.class:  Scribe\ImageMagickBundle\Component\ImageMagickFactory
+
+services:
+
+    s.imagemagick.instance:
+        class:           "%s.imagemagick.instance.class%"
+        factory_service: s.imagemagick.factory
+        factory_method:  get
+        arguments:
+            - "@service_container"
+
+    s.imagemagick.factory:
+        class:           "%s.imagemagick.factory"
