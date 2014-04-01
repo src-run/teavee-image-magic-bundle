@@ -13,4 +13,4 @@ services:
             - "@service_container"
 
     s.imagemagick.factory:
-        class:           "%s.imagemagick.factory"
+        class:           "%s.imagemagick.factory.class%"
