@@ -152,7 +152,7 @@ class ImageMagick
             $newX = $newY / $y * $x;
         }
 
-        $this->imagick->resizeImage($newX, $newY, Imagick::FILTER_LANCZOS, 0.5, $bestFit);
+        $this->imagick->resizeImage($newX, $newY, Imagick::FILTER_LANCZOS, 1, $bestFit);
 
         return $this->getGeometry();
     }
