@@ -82,7 +82,7 @@ class ImageMagick
         $this->imagick->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
         $this->imagick->setImageFormat('jpeg');
         $this->safeSetResolution(120);
-        $this->imagick->setImageCompressionQuality(80);
+        $this->imagick->setImageCompressionQuality(100);
     }
 
     /**
@@ -152,7 +152,7 @@ class ImageMagick
             $newX = $newY / $y * $x;
         }
 
-        $this->imagick->resizeImage($newX, $newY, Imagick::FILTER_LANCZOS, 1, $bestFit);
+        $this->imagick->resizeImage($newX, $newY, Imagick::FILTER_LANCZOS, 0.5, $bestFit);
 
         return $this->getGeometry();
     }
