@@ -80,9 +80,9 @@ class ImageMagick
         }
 
         $this->imagick->setImageUnits(Imagick::RESOLUTION_PIXELSPERINCH);
-        $this->imagick->setImageFormat('png');
+        $this->imagick->setImageFormat('jpeg');
         $this->safeSetResolution(120);
-        $this->imagick->setImageCompressionQuality(90);
+        $this->imagick->setImageCompressionQuality(80);
     }
 
     /**
