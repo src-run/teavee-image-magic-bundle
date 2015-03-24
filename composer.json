@@ -1,23 +1,32 @@
 {
-    "name"        : "scribe/imagemagick-bundle",
+    "name"        : "scribe/magick-bundle",
     "description" : "Symfony bundle to provide an abstraction layer over the PHP IMagick library with higher-level, reusable functionality",
     "keywords"    : ["Symfony2", "ImageMagick", "IMagick", "Scribe"],
     "type"        : "symfony-bundle",
-    "homepage"    : "https://github.com/scribenet/ScribeImageMagickBundle",
+    "homepage"    : "https://github.com/scribenet/symfony-magick-bundle",
     "license"     : "MIT",
     "authors": [{
         "name"    : "Rob Frawley 2nd",
-        "email"   : "rfrawley@scribenet.com",
-        "homepage": "http://www.scribenet.com/"
+        "email"   : "rmf@scribe.software"
     }],
     "require": {
-        "symfony/framework-bundle": ">=2.0",
-        "symfony/monolog-bridge"  : ">=2.0"
+        "php"                  : ">=5.6",
+        "scribe/mantle-bundle" : "2.0.*@dev"
     },
     "autoload": {
         "psr-0": { 
             "Scribe\\ImageMagickBundle": "" 
         }
     },
-    "target-dir": "Scribe/ImageMagickBundle"
+    "target-dir": "Scribe/ImageMagickBundle",
+    "config" : {
+        "bin-dir"           : "bin",
+        "preferred-install" : "auto",
+        "minimum-stability" : "dev"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    }
 }
