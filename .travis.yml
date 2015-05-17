@@ -37,6 +37,8 @@ before_install:
     - phpenv rehash
     - mkdir -p build/logs
     - mkdir -p bin
+    - php -m
+    - php -i
 
 install:
     - travis_retry composer self-update
