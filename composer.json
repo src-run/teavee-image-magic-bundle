@@ -1,24 +1,73 @@
 {
     "name"        : "scribe/magick-bundle",
-    "description" : "Symfony bundle to provide an abstraction layer over the PHP IMagick library with higher-level, reusable functionality",
-    "keywords"    : ["Symfony2", "ImageMagick", "IMagick", "Scribe"],
-    "type"        : "symfony-bundle",
-    "homepage"    : "https://github.com/scribenet/symfony-magick-bundle",
     "license"     : "MIT",
-    "authors": [{
-        "name"    : "Rob Frawley 2nd",
-        "email"   : "rmf@scribe.software"
-    }],
+    "type"        : "project",
+    "homepage"    : "https://scr.be/magick-bundle",
+    "description" : "Symfony bundle to provide an abstraction layer over the PHP IMagick library with higher-level, reusable functionality",
+    "support" : {
+        "email"  : "rmf@scr.be",
+        "issues" : "https://symfony-mantle-bundle.docs.scribe.tools/issues",
+        "source" : "https://symfony-mantle-bundle.docs.scribe.tools/git",
+        "irc"    : "irc://irc.efnet.org/scribe"
+    },
+    "keywords"    : [
+        "scribe-magick-bundle",
+        "symfony-magick-bundle",
+        "magick-bundle",
+        "image-magick",
+        "bundle",
+        "symfony",
+        "symfony2",
+        "symfony-framework",
+        "scribe",
+        "scr",
+        "scribenet",
+        "scribeinc",
+        "scribe-software",
+        "scribe-services"
+    ],
+    "authors"     : [
+        {
+            "name"    : "Rob Frawley 2nd",
+            "email"   : "rmf@scr.be",
+            "homepage": "https://scr.be/rmf",
+            "role"    : "Project Lead"
+        }
+    ],
     "require": {
         "php"                  : ">=5.6",
-        "scribe/mantle-bundle" : "2.0.*@dev"
+        "scribe/mantle-bundle" : "2.0.*@dev",
+        "scribe/cache-bundle"  : "2.0.*@dev"
     },
-    "autoload": {
-        "psr-0": { 
-            "Scribe\\ImageMagickBundle": "" 
+    "require-dev" : {
+        "ext-imagick"                          : ">=3.3.0RC1",
+        "ext-memcached"                        : "~2.2",
+        "ext-igbinary"                         : "~1.2",
+        "ext-tidy"                             : "~2.0",
+        "symfony/symfony"                      : "2.7.0-BETA2",
+        "symfony/framework-bundle"             : "2.7.0-BETA2",
+        "symfony/phpunit-bridge"               : "2.7.0-BETA2",
+        "phpunit/phpunit"                      : "~4.6",
+        "sensio/generator-bundle"              : "~2.5",
+        "doctrine/orm"                         : "~2.5",
+        "doctrine/common"                      : "~2.5",
+        "doctrine/dbal"                        : "~2.5",
+        "doctrine/doctrine-bundle"             : "~1.4",
+        "doctrine/doctrine-fixtures-bundle"    : "2.2.*@dev",
+        "doctrine/data-fixtures"               : "1.0.*@dev",
+        "sensiolabs/security-checker"          : "2.0.*@dev",
+        "scrutinizer/ocular"                   : "dev-master",
+        "satooshi/php-coveralls"               : "dev-multipleroot",
+        "chriskite/phactory"                   : "~0.4.3",
+        "sami/sami"                            : "~3.0",
+        "nikic/php-parser"                     : ">=1.0,<1.2",
+        "pdepend/pdepend"                      : "~2.0"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Scribe\\MagickBundle\\" : "src/"
         }
     },
-    "target-dir": "Scribe/ImageMagickBundle",
     "config" : {
         "bin-dir"           : "bin",
         "preferred-install" : "auto",
@@ -28,5 +77,11 @@
         "branch-alias": {
             "dev-master": "2.0-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/scribenet/php-coveralls.git"
+        }
+    ]
 }

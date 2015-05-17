@@ -1,25 +1,26 @@
 <?php
+
 /*
- * This file is part of the Scribe World Application.
+ * This file is part of the Scribe Magick Bundle.
  *
- * (c) Scribe Inc. <scribe@scribenet.com>
+ * (c) Scribe Inc. <https://scr.be/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Scribe\ImageMagickBundle\Component;
+namespace Scribe\MagickBundle\Component;
 
 /**
- * ImageMagickFactory class
+ * Class ImageMagickFactory.
  */
 class ImageMagickFactory
 {
     /**
      * @return ImageMagick
      */
-    public function get() 
+    public function get()
     {
-        return new ImageMagick;
+        return new ImageMagick();
     }
 }

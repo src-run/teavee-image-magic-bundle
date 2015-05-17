@@ -1,0 +1,6 @@
+imports:
+    - { resource: config.yml }
+
+scribe_cache:
+    global:
+        enabled: true

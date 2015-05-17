@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="true"
+         bootstrap="app/config/shared_public/tests/bootstrap/phpunit.php">
+    <testsuites>
+        <testsuite name="Scribe Cache Bundle Test Suite">
+            <directory>./src/Tests</directory>
+        </testsuite>
+    </testsuites>
+    <groups>
+        <exclude>
+            <group>functional</group>
+        </exclude>
+    </groups>
+    <filter>
+        <whitelist>
+            <directory>./src</directory>
+            <exclude>
+                <directory>./src/Tests</directory>
+                <directory>./src/Resources/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="build/logs/coverage/"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+    <php>
+        <server name="KERNEL_DIR" value="./src/Tests/app" />
+        <server name="SYMFONY__DATABASE_DRIVER" value="pdo_mysql" />
+        <server name="SYMFONY__DATABASE_HOST" value="127.0.0.1" />
+        <server name="SYMFONY__DATABASE_PORT" value="3306" />
+        <server name="SYMFONY__DATABASE_NAME" value="Scribe_SymfonyMagickBundle" />
+        <server name="SYMFONY__DATABASE_USER" value="root" />
+        <server name="SYMFONY__DATABASE_PASSWORD" value="" />
+        <ini name="error_reporting" value="-1" />
+        <ini name="intl.default_locale" value="en" />
+        <ini name="intl.error_level" value="0" />
+        <ini name="memory_limit" value="-1" />
+    </php>
+</phpunit>

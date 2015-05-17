@@ -1,0 +1,22 @@
+---
+
+parameters:
+
+    s.magick.instance.class: Scribe\MagickBundle\Component\ImageMagick
+    s.magick.factory.class:  Scribe\MagickBundle\Component\ImageMagickFactory
+
+services:
+
+    s.magick:
+        alias: s.magick.instance
+
+    s.magick.instance:
+        class: %s.magick.instance.class%
+        factory:
+            - @s.magick.factory
+            - get
+        arguments:
+            - @service_container
+
+    s.magick.factory:
+        class: %s.magick.factory.class%

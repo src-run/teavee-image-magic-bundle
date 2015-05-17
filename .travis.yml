@@ -1,0 +1,56 @@
+language: php
+
+sudo: required
+
+branches:
+    only:
+        - master
+
+env:
+    global:
+        - SYMFONY_DEPRECATIONS_HELPER=weak
+
+matrix:
+    include:
+        - php: 5.6
+        - php: nightly
+        - php: hhvm-nightly
+    allow_failures:
+        - php: nightly
+        - php: hhvm-nightly
+    fast_finish: true
+
+services:
+  - memcached
+
+notifications:
+    slack:
+        secure: kireALpefhfrVR4bcpZU1WL3U584m98uO29bjkZt4720hNsgr+t0ryZZIZfF5lIBZqF9ynGO3IIfRqdqaeyof0/s5YxCLtMO7/it0eeVgo/nmUbf4aMdrkb+nGwEepBN7XNkgFF9kxfoWfIEOWhlRYOdyJLgYiVNulnhyLsE0m4=
+
+before_install:
+    - git submodule update --init --recursive && cd app/config/shared_public && git checkout master && cd ../../../
+    - sh app/config/shared_public/tests/travis/php-build-igbinary.sh
+    - sh app/config/shared_public/tests/travis/php-build-memcached.sh
+    - sh app/config/shared_public/tests/travis/php-build-twig.sh
+    - sh app/config/shared_public/tests/travis/php-build-imagemagick.sh
+    - phpenv config-add app/config/shared_public/tests/travis/config-timezone.ini
+    - phpenv rehash
+    - mkdir -p build/logs
+    - mkdir -p bin
+
+install:
+    - travis_retry composer self-update
+    - travis_retry composer clear-cache
+    - travis_retry composer install --no-interaction || travis_retry composer update --no-interaction
+
+before_script:
+    - app/console doctrine:database:create --no-interaction
+    - app/console doctrine:schema:create --no-interaction
+    - app/console doctrine:fixtures:load --no-interaction
+
+script:
+    - bin/phpunit --verbose --configuration phpunit.xml.dist
+
+after_script:
+    - bin/coveralls -c .coveralls.yml -vvv
+    - bin/ocular code-coverage:upload --format=php-clover build/logs/clover.xml

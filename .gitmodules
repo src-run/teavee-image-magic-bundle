@@ -1,0 +1,3 @@
+[submodule "app/config/shared_public"]
+	path = app/config/shared_public
+	url = https://github.com/scribenet/world-configuration-public.git

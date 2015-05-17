@@ -1,0 +1,7 @@
+# .coveralls.yml
+
+src_dirs:
+    - src
+
+coverage_clover: build/logs/clover.xml
+json_path: build/logs/coveralls-upload.json
