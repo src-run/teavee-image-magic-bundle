@@ -37,6 +37,8 @@ before_install:
     - phpenv rehash
     - mkdir -p build/logs
     - mkdir -p bin
+    - php -v
+    - php -r '$ext = new ReflectionExtension("imagick"); var_dump($ext->getVersion());'
     - php -m
     - php -i
 
