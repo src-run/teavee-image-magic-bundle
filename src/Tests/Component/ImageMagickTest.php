@@ -67,7 +67,7 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
 
         $this->setExpectedException('Scribe\MagickBundle\Exception\MagickException');
 
-        $m->readImage('not-a-valid-file-path', 'file-name', ImageMagick::READ_METHOD_FILEPATH);
+        $m->readImageIn('not-a-valid-file-path', ImageMagick::READ_METHOD_FILE_PATH, 'file-name');
     }
 
     public function testReadImageAsFilePath()
@@ -75,7 +75,8 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $m = $this->getM();
 
         $m
-            ->readImage($this->getImageFixturePath1(), null, ImageMagick::READ_METHOD_FILEPATH, 'jpeg')
+            ->readImageIn($this->getImageFixturePath1(),ImageMagick::READ_METHOD_FILE_PATH)
+            ->setFormat('jpeg')
             ->flattenAndRemoveAlphaAndRgb()
             ->createThumbnail(300)
             ->stripAll()
@@ -90,7 +91,7 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
 
         $this->setExpectedException('Scribe\MagickBundle\Exception\MagickException');
 
-        $m->readImage('not-a-resource', 'file-name', ImageMagick::READ_METHOD_RESOURCE);
+        $m->readImageIn('not-a-resource', ImageMagick::READ_METHOD_RESOURCE, 'file-name');
     }
 
     public function testReadImageAsResource()
@@ -100,7 +101,7 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $resource = fopen('https://static.scribenet.com/images/logo/scr-logo-web_1200.png', 'r');
 
         $m
-            ->readImage($resource, 'src-logo.png', ImageMagick::READ_METHOD_RESOURCE)
+            ->readImageIn($resource, ImageMagick::READ_METHOD_RESOURCE, 'src-logo.png')
             ->flattenAndRemoveAlphaAndRgb()
             ->scaleImageMax(400, 400, true)
             ->stripAll()
@@ -116,7 +117,8 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $this->setExpectedException('Scribe\MagickBundle\Exception\MagickException');
 
         $m
-            ->readImage('', null, ImageMagick::READ_METHOD_BINARY, 'jpeg')
+            ->readImageIn('', ImageMagick::READ_METHOD_BINARY, null)
+            ->setFormat('jpeg')
             ->flattenAndRemoveAlphaAndRgb()
             ->scaleImageMax(1200, 1200, true)
             ->setCompressionQuality(50)
@@ -131,7 +133,8 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $image = file_get_contents('https://static.scribenet.com/web/v1/bundles/public/public-hero-fixed-background.jpg');
 
         $m
-            ->readImage($image, 'public-hero-fixed-background.jpg', ImageMagick::READ_METHOD_BINARY, 'jpeg')
+            ->readImageIn($image, ImageMagick::READ_METHOD_BINARY, 'public-hero-fixed-background.jpg')
+            ->setFormat('jpeg')
             ->flattenAndRemoveAlphaAndRgb()
             ->scaleImageMax(1200, 1200, true)
             ->setCompressionQuality(50)
@@ -147,7 +150,8 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $m2 = $this->getM();
 
         $m2
-            ->readImage($image, 'public-hero-fixed-background-high-quality.jpg', ImageMagick::READ_METHOD_BINARY, 'jpeg')
+            ->readImageIn($image, ImageMagick::READ_METHOD_BINARY, 'public-hero-fixed-background-high-quality.jpg')
+            ->setFormat('jpeg')
             ->flattenAndRemoveAlphaAndRgb()
             ->scaleImageMax(1200, 1200, true)
             ->setCompressionQuality(100)
@@ -162,7 +166,8 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $m = $this->getM();
 
         $m
-            ->readImage($this->getImageFixturePath1(), null, ImageMagick::READ_METHOD_FILEPATH, 'png')
+            ->readImageIn($this->getImageFixturePath1(), ImageMagick::READ_METHOD_FILE_PATH, null)
+            ->setFormat('png')
             ->flattenAndRemoveAlphaAndRgb()
             ->createThumbnail(400)
             ->stripAll()

@@ -38,7 +38,7 @@ class ImageMagick
      *
      * @var string
      */
-    const READ_METHOD_FILEPATH = 'filepath';
+    const READ_METHOD_FILE_PATH = 'filepath';
 
     /**
      * @var Imagick
@@ -54,49 +54,49 @@ class ImageMagick
     }
 
     /**
-     * @param mixed       $image
-     * @param null|string $file_name
-     * @param string      $method
-     * @param string      $format
-     * @param int         $quality
+     * Read an image file into the imagick library
+     *
+     * @param mixed  $imageContent
+     * @param string $readMethod
+     * @param string $imageName
      *
      * @throws MagickException
      *
      * @return $this
      */
-    public function readImage($image, $file_name = null, $method = self::READ_METHOD_BINARY, $format = 'jpeg', $quality = 100)
+    public function readImageIn($imageContent, $readMethod = self::READ_METHOD_BINARY, $imageName = null)
     {
-        if ($method === self::READ_METHOD_FILEPATH) {
+        if ($readMethod === self::READ_METHOD_FILE_PATH) {
 
-            if (false === is_readable($image)) {
-                throw new MagickException(sprintf('The requested file path "%s" is not readable.', (string) $image));
+            if (false === is_readable($imageContent)) {
+                throw new MagickException(sprintf('The requested file path "%s" is not readable.', (string) $imageContent));
             }
 
-            $this->imagick->readImage($image);
+            $this->imagick->readImage($imageContent);
 
-        } elseif ($method === self::READ_METHOD_RESOURCE) {
+        } elseif ($readMethod === self::READ_METHOD_RESOURCE) {
 
-            if (false === is_resource($image)) {
+            if (false === is_resource($imageContent)) {
                 throw new MagickException(sprintf('The passed image value is not a file resource in "%s".', get_class($this)));
             }
 
-            $this->imagick->readImageFile($image, $file_name);
+            $this->imagick->readImageFile($imageContent, $imageName);
 
-        } elseif ($method === self::READ_METHOD_BINARY) {
+        } elseif ($readMethod === self::READ_METHOD_BINARY) {
 
-            if ($file_name === null) {
+            if ($imageName === null) {
                 throw new MagickException(sprintf('You must specify a file name when passing binary type to "%s".', get_class($this)));
             }
 
-            $this->imagick->readImageBlob($image, $file_name);
+            $this->imagick->readImageBlob($imageContent, $imageName);
 
         } else {
 
-            throw new MagickException(sprintf('Invalid method type of "%s" provided to "%s".', $method, get_class($this)));
+            throw new MagickException(sprintf('Invalid method type of "%s" provided to "%s".', $readMethod, get_class($this)));
 
         }
 
-        $this->setFormat($format);
+        $this->setFormat('jpeg');
 
         return $this;
     }
@@ -107,7 +107,7 @@ class ImageMagick
     public function flattenAndRemoveAlphaAndRgb()
     {
         $this->imagick->setImageBackgroundColor('white');
-        $this->imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
+        $this->imagick->setImageAlphaChannel(defined(Imagick::ALPHACHANNEL_REMOVE) ? Imagick::ALPHACHANNEL_REMOVE : 11);
         $this->imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
         $this->imagick->transformimagecolorspace(Imagick::COLORSPACE_RGB);
 
@@ -158,10 +158,7 @@ class ImageMagick
      */
     public function getResolution()
     {
-        $resolution = $this
-            ->imagick
-            ->getImageResolution()
-        ;
+        $resolution = $this->imagick->getImageResolution();
 
         return [
             $resolution['x'],
@@ -174,10 +171,7 @@ class ImageMagick
      */
     public function getGeometry()
     {
-        $geometry = $this
-            ->imagick
-            ->getImageGeometry()
-        ;
+        $geometry = $this->imagick->getImageGeometry();
 
         return [
             $geometry['width'],
