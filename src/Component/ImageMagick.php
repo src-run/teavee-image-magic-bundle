@@ -107,7 +107,7 @@ class ImageMagick
     public function flattenAndRemoveAlphaAndRgb()
     {
         $this->imagick->setImageBackgroundColor('white');
-        $this->imagick->setImageAlphaChannel(defined(Imagick::ALPHACHANNEL_REMOVE) ? Imagick::ALPHACHANNEL_REMOVE : 11);
+        $this->imagick->setImageAlphaChannel(defined(\Imagick::ALPHACHANNEL_REMOVE) ? \Imagick::ALPHACHANNEL_REMOVE : 11);
         $this->imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
         $this->imagick->transformimagecolorspace(Imagick::COLORSPACE_RGB);
 
