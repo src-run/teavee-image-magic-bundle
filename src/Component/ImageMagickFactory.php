@@ -21,6 +21,6 @@ class ImageMagickFactory
      */
     public function get()
     {
-        return new ImageMagick();
+        return (new ImageMagick())->init();
     }
 }

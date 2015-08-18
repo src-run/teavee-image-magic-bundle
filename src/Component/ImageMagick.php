@@ -17,99 +17,203 @@ use Scribe\MagickBundle\Exception\MagickException;
 /**
  * ImageMagick class
  */
-class ImageMagick
+class ImageMagick implements ImageMagickInterface
 {
     /**
-     * Read the image in as binary data from a string.
+     * Internal PHP ImageMagick object.
      *
-     * @var string
-     */
-    const READ_METHOD_BINARY = 'binary';
-
-    /**
-     * Read the image in as a file resource.
-     *
-     * @var string
-     */
-    const READ_METHOD_RESOURCE = 'resource';
-
-    /**
-     * Read the image in from a file path.
-     *
-     * @var string
-     */
-    const READ_METHOD_FILE_PATH = 'filepath';
-
-    /**
      * @var Imagick
      */
-    private $imagick;
+    protected $imagick;
 
     /**
-     * Constructor
+     * Constructor does not automatically create imagick instance to work with.
      */
-    public function __construct()
-    {
-        $this->imagick = new Imagick;
-    }
+    public function __construct() {}
 
     /**
-     * Read an image file into the imagick library
-     *
-     * @param mixed  $imageContent
-     * @param string $readMethod
-     * @param string $imageName
-     *
-     * @throws MagickException
+     * Initialize internal PHP IMagick object.
      *
      * @return $this
      */
-    public function readImageIn($imageContent, $readMethod = self::READ_METHOD_BINARY, $imageName = null)
+    public function init()
     {
-        if ($readMethod === self::READ_METHOD_FILE_PATH) {
-
-            if (false === is_readable($imageContent)) {
-                throw new MagickException(sprintf('The requested file path "%s" is not readable.', (string) $imageContent));
-            }
-
-            $this->imagick->readImage($imageContent);
-
-        } elseif ($readMethod === self::READ_METHOD_RESOURCE) {
-
-            if (false === is_resource($imageContent)) {
-                throw new MagickException(sprintf('The passed image value is not a file resource in "%s".', get_class($this)));
-            }
-
-            $this->imagick->readImageFile($imageContent, $imageName);
-
-        } elseif ($readMethod === self::READ_METHOD_BINARY) {
-
-            if ($imageName === null) {
-                throw new MagickException(sprintf('You must specify a file name when passing binary type to "%s".', get_class($this)));
-            }
-
-            $this->imagick->readImageBlob($imageContent, $imageName);
-
-        } else {
-
-            throw new MagickException(sprintf('Invalid method type of "%s" provided to "%s".', $readMethod, get_class($this)));
-
-        }
-
-        $this->setFormat('jpeg');
+        $this->imagick = new Imagick;
 
         return $this;
     }
 
     /**
+     * Read image as binary
+     *
+     * @param mixed  $image
+     * @param string $name
+     *
+     * @throws MagickException
+     *
+     * @returns $this
+     */
+    public function readBinary($image, $name)
+    {
+        try {
+            $this->imagick->readImageBlob($image, $name);
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Unrecoverable error while reading binary image %s: %s', (string) $name, (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Read image from file path
+     *
+     * @param string      $path
+     * @param null|string $name
+     *
+     * @throws MagickException
+     *
+     * @returns $this
+     */
+    public function readFile($path, $name = null)
+    {
+        if (true !== is_readable($path)) {
+            throw new MagickException(
+                sprintf('File path is not readable: %s', (string) $path)
+            );
+        }
+
+        if (null === $name || strlen($name) === 0) {
+            $name = pathinfo($path, PATHINFO_FILENAME);
+        }
+
+        try {
+            $this->imagick->readImage($path);
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Unrecoverable error while reading image %s from path %s: %s', (string) $name, (string) $path, (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Read image from resource handle
+     *
+     * @param resource    $resource
+     * @param null|string $name
+     *
+     * @throws MagickException
+     *
+     * @returns $this
+     */
+    public function readResource($resource, $name = null)
+    {
+        if (true !== is_resource($resource)) {
+            throw new MagickException(
+                sprintf('Invalid resource provided for %s', (string) $name)
+            );
+        }
+
+        try {
+            $this->imagick->readImageFile($resource, $name);
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Unrecoverable error while reading resource %s: %s', (string) $name, (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets background color and removes alpha channel.
+     *
+     * @param  null|string $backgroundColor
+     *
+     * @throws MagickException
+     *
+     * @returns $this
+     */
+    public function removeAlpha($backgroundColor = null)
+    {
+        $backgroundColor = ($backgroundColor === null ? 'white' : $backgroundColor);
+
+        try {
+            $this->imagick->setBackgroundColor($backgroundColor);
+            $this->imagick->setImageAlphaChannel(Imagick::ALPHACHANNEL_REMOVE);
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Could not remove alpha channel: %s', (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Removes (flattens) layers.
+     *
+     * @throws MagickException
+     *
+     * @returns $this
+     */
+    public function removeLayers()
+    {
+        try {
+            $this->imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Could not remove layers: %s', (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove excess metadata.
+     *
+     * @throws MagickException
+     *
      * @return $this
      */
-    public function flattenAndRemoveAlphaAndRgb()
+    public function removeMeta()
     {
-        $this->imagick->setImageBackgroundColor('white');
-        $this->imagick->setImageAlphaChannel(defined(\Imagick::ALPHACHANNEL_REMOVE) ? \Imagick::ALPHACHANNEL_REMOVE : 11);
-        $this->imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
-        $this->imagick->transformimagecolorspace(Imagick::COLORSPACE_RGB);
+        try {
+            $this->imagick->stripImage();
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Could not remove image metadata: %s', (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    public function convertColorspace($colorspace)
+    {
+        try {
+            $this->imagick->stripImage();
+        } catch(\Exception $e) {
+            throw new MagickException(
+                sprintf('Could not remove image metadata: %s', (string) $e->getMessage())
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return $this
+     */
+    public function convertFormat($format)
+    {
+        $this->imagick->setImageFormat($format);
 
         return $this;
     }
@@ -122,18 +226,6 @@ class ImageMagick
     public function setUnits($units)
     {
         $this->imagick->setImageUnits($units);
-
-        return $this;
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return $this
-     */
-    public function setFormat($format)
-    {
-        $this->imagick->setImageFormat($format);
 
         return $this;
     }
@@ -244,18 +336,6 @@ class ImageMagick
             ->imagick
             ->setImagePage($newX, $newY, 0, 0)
         ;
-
-        $this->scaleImageMax($geometry, $geometry, false, $filter);
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function stripAll()
-    {
-        $this->imagick->stripImage();
 
         return $this;
     }
