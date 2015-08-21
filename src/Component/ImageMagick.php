@@ -284,7 +284,7 @@ class ImageMagick implements ImageMagickInterface
         list($x, $y) = $this->getGeometry();
 
         if ($x <= $max_x && $y <= $max_y) {
-            return $this->getGeometry();
+            return $this;
         }
 
         if ($x > $y) {

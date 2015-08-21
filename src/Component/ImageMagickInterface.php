@@ -24,6 +24,18 @@ interface ImageMagickInterface
     const COLORSPACE_RGB = \Imagick::COLORSPACE_RGB;
 
     /**
+     * SRGB colorspace.
+     */
+    const COLORSPACE_SRGB = \Imagick::COLORSPACE_SRGB;
+
+    /**
+     * Format image as JPEG.
+     *
+     * @var string
+     */
+    const FORMAT_JPEG = 'jpeg';
+
+    /**
      * Initialize internal PHP IMagick object.
      *
      * @return $this
