@@ -196,10 +196,10 @@ class ImageMagick implements ImageMagickInterface
     public function convertColorspace($colorspace)
     {
         try {
-            $this->imagick->stripImage();
+		$this->imagick->transformimagecolorspace($colorspace);
         } catch(\Exception $e) {
             throw new MagickException(
-                sprintf('Could not remove image metadata: %s', (string) $e->getMessage())
+                sprintf('Could not modify image colorspace to %s: %s', (string) $colorspace, (string) $e->getMessage())
             );
         }
 
