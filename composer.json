@@ -2,29 +2,16 @@
     "name"        : "scribe/magick-bundle",
     "license"     : "MIT",
     "type"        : "project",
-    "homepage"    : "https://scr.be/magick-bundle",
-    "description" : "Symfony bundle to provide an abstraction layer over the PHP IMagick library with higher-level, reusable functionality",
+    "homepage"    : "https://wonka-bundle.oss.scr.be/home",
+    "description" : "Simple abstraction layer over PHP's IMagick library.",
     "support" : {
         "email"  : "rmf@scr.be",
-        "issues" : "https://symfony-mantle-bundle.docs.scribe.tools/issues",
-        "source" : "https://symfony-mantle-bundle.docs.scribe.tools/git",
+        "issues" : "https://wonka-bundle.oss.scr.be/issues",
+        "source" : "https://wonka-bundle.oss.scr.be/git",
         "irc"    : "irc://irc.efnet.org/scribe"
     },
     "keywords"    : [
-        "scribe-magick-bundle",
-        "symfony-magick-bundle",
-        "magick-bundle",
-        "image-magick",
-        "bundle",
-        "symfony",
-        "symfony2",
-        "symfony-framework",
-        "scribe",
-        "scr",
-        "scribenet",
-        "scribeinc",
-        "scribe-software",
-        "scribe-services"
+        "magick-bundle", "scribe-magick-bundle", "magick", "imagick", "imagemagick", "symfony", "scribe", "scribenet"
     ],
     "authors"     : [
         {
@@ -35,36 +22,28 @@
         }
     ],
     "require": {
-        "php"                  : ">=5.6",
-        "scribe/mantle-bundle" : "2.0.*@dev",
-        "scribe/cache-bundle"  : "2.0.*@dev"
+        "php"                          : ">=5.6.4,~5.6",
+      "ext-imagick"                    : ">=3.3.0RC1",
+        "scribe/wonka-library"         : "~0.1@dev",
+        "scribe/wonka-bundle"          : "~0.1@dev"
     },
     "require-dev" : {
-        "ext-imagick"                          : ">=3.3.0RC1",
-        "ext-memcached"                        : "~2.2",
-        "ext-igbinary"                         : "~1.2",
-        "ext-tidy"                             : "~2.0",
-        "symfony/symfony"                      : "~2.7.0",
-        "symfony/stopwatch"                    : "~2.7.0",
-        "symfony/framework-bundle"             : "~2.7.0",
-        "symfony/phpunit-bridge"               : "~2.7.0",
-        "phpunit/phpunit"                      : "~4.6",
-        "sensio/generator-bundle"              : "~2.5",
-        "doctrine/orm"                         : "~2.5",
-        "doctrine/common"                      : "~2.5",
-        "doctrine/dbal"                        : "~2.5",
-        "doctrine/doctrine-bundle"             : "~1.4",
-        "doctrine/doctrine-fixtures-bundle"    : "2.2.*@dev",
-        "doctrine/data-fixtures"               : "1.0.*@dev",
-        "doctrine/migrations"                  : "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle"  : "~1.0",
-        "sensiolabs/security-checker"          : "~2.0",
-        "scrutinizer/ocular"                   : "~1.1.1",
-        "satooshi/php-coveralls"               : "dev-multipleroot",
-        "chriskite/phactory"                   : "~0.4.3",
-        "sami/sami"                            : "~3.0",
-        "nikic/php-parser"                     : ">=1.0,<1.2",
-        "pdepend/pdepend"                      : "~2.0"
+        "symfony/symfony"             : "~2.7|~2.8@dev",
+        "symfony/monolog-bundle"      : "~2.7|~2.8@dev",
+        "symfony/stopwatch"           : "~2.7|~2.8@dev",
+        "symfony/var-dumper"          : "~2.7|~2.8@dev",
+        "symfony/debug-bundle"        : "~2.7|~2.8@dev",
+        "symfony/phpunit-bridge"      : "~2.7|~2.8@dev",
+        "phpunit/phpunit"             : "~4.6",
+        "sensiolabs/security-checker" : "~3.0",
+        "scrutinizer/ocular"          : "~1.1",
+        "satooshi/php-coveralls"      : "~0.6",
+        "chriskite/phactory"          : "~0.4",
+        "sami/sami"                   : "~3.0",
+        "nikic/php-parser"            : ">=1.0,<1.2"
+    },
+    "conflict" : {
+        "scribe/mantle-bundle" : "<2.1"
     },
     "autoload" : {
         "psr-4" : {
@@ -78,13 +57,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "2.1-dev"
         }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "https://github.com/scribenet/php-coveralls.git"
-        }
-    ]
+    }
 }

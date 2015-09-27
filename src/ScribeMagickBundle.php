@@ -16,6 +16,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Class ScribeMagickBundle.
  */
-class ScribeMagickBundle extends Bundle {}
+class ScribeMagickBundle extends Bundle
+{
+}
 
 /* EOF */

@@ -12,17 +12,17 @@
 namespace Scribe\MagickBundle\Tests\Component;
 
 use Scribe\MagickBundle\Component\ImageMagick;
-use Scribe\Utility\UnitTest\AbstractMantleKernelTestCase;
+use Scribe\WonkaBundle\Utility\TestCase\KernelTestCase;
 
 /**
  * Class ImageMagickTest.
  */
-class ImageMagickTest extends AbstractMantleKernelTestCase
+class ImageMagickTest extends KernelTestCase
 {
     public function getImageFixtureBasePath()
     {
         return realpath(
-            static::$staticContainer->getParameter('kernel.root_dir').
+            self::$staticContainer->getParameter('kernel.root_dir').
             '/../../../app/config/shared_public/tests/fixtures/ScribeMagickBundle/Component/'
         ).DIRECTORY_SEPARATOR;
     }
@@ -67,7 +67,7 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
 
         $this->setExpectedException('Scribe\MagickBundle\Exception\MagickException');
 
-        $m->readImageIn('not-a-valid-file-path', ImageMagick::READ_METHOD_FILE_PATH, 'file-name');
+        $m->readFile('not-a-valid-file-path', 'file-name');
     }
 
     public function testReadImageAsFilePath()
@@ -75,12 +75,13 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $m = $this->getM();
 
         $m
-            ->readImageIn($this->getImageFixturePath1(),ImageMagick::READ_METHOD_FILE_PATH)
-            ->setFormat('jpeg')
-            ->flattenAndRemoveAlphaAndRgb()
-            ->createThumbnail(300)
-            ->stripAll()
-        ;
+            ->readFile($this->getImageFixturePath1())
+            ->convertFormat('jpeg')
+            ->removeAlpha()
+            ->removeLayers()
+            ->removeMeta()
+            ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
+            ->createThumbnail(300);
 
         static::assertEquals(file_get_contents($this->getImageThumbnailFixturePath1()), $m->getBlob());
     }
@@ -91,7 +92,7 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
 
         $this->setExpectedException('Scribe\MagickBundle\Exception\MagickException');
 
-        $m->readImageIn('not-a-resource', ImageMagick::READ_METHOD_RESOURCE, 'file-name');
+        $m->readResource('not-a-resource', 'file-name');
     }
 
     public function testReadImageAsResource()
@@ -101,11 +102,13 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $resource = fopen('https://static.scribenet.com/images/logo/scr-logo-web_1200.png', 'r');
 
         $m
-            ->readImageIn($resource, ImageMagick::READ_METHOD_RESOURCE, 'src-logo.png')
-            ->flattenAndRemoveAlphaAndRgb()
-            ->scaleImageMax(400, 400, true)
-            ->stripAll()
-        ;
+            ->readResource($resource, 'src-logo.png')
+            ->convertFormat('jpeg')
+            ->removeAlpha()
+            ->removeLayers()
+            ->removeMeta()
+            ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
+            ->scaleImageMax(400, 400, true);
 
         static::assertEquals(file_get_contents($this->getImageThumbnailFixturePath2()), $m->getBlob());
     }
@@ -117,13 +120,14 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $this->setExpectedException('Scribe\MagickBundle\Exception\MagickException');
 
         $m
-            ->readImageIn('', ImageMagick::READ_METHOD_BINARY, null)
-            ->setFormat('jpeg')
-            ->flattenAndRemoveAlphaAndRgb()
+            ->readBinary('', null)
+            ->convertFormat('jpeg')
+            ->removeAlpha()
+            ->removeLayers()
+            ->removeMeta()
+            ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
             ->scaleImageMax(1200, 1200, true)
-            ->setCompressionQuality(50)
-            ->stripAll()
-        ;
+            ->setCompressionQuality(50);
     }
 
     public function testReadImageAsBlob()
@@ -133,16 +137,17 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $image = file_get_contents('https://static.scribenet.com/web/v1/bundles/public/public-hero-fixed-background.jpg');
 
         $m
-            ->readImageIn($image, ImageMagick::READ_METHOD_BINARY, 'public-hero-fixed-background.jpg')
-            ->setFormat('jpeg')
-            ->flattenAndRemoveAlphaAndRgb()
+            ->readBinary($image, 'public-hero-fixed-background.jpg')
+            ->convertFormat('jpeg')
+            ->removeAlpha()
+            ->removeLayers()
+            ->removeMeta()
+            ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
             ->scaleImageMax(1200, 1200, true)
-            ->setCompressionQuality(50)
-            ->stripAll()
-        ;
+            ->setCompressionQuality(50);
 
         static::assertEquals(file_get_contents($this->getImageFixtureBasePath().'public-hero-fixed-background.jpeg'), $m->getBlob());
-        static::assertEquals(41666, $m->getFileSize());
+        static::assertEquals(41546, $m->getFileSize());
         static::assertEquals('jpeg', $m->getFormat());
         static::assertEquals([1198, 617], $m->getGeometry());
         static::assertEquals([300, 300], $m->getResolution());
@@ -150,13 +155,14 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $m2 = $this->getM();
 
         $m2
-            ->readImageIn($image, ImageMagick::READ_METHOD_BINARY, 'public-hero-fixed-background-high-quality.jpg')
-            ->setFormat('jpeg')
-            ->flattenAndRemoveAlphaAndRgb()
+            ->readBinary($image, 'public-hero-fixed-background-high-quality.jpg')
+            ->convertFormat('jpeg')
+            ->removeAlpha()
+            ->removeLayers()
+            ->removeMeta()
+            ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
             ->scaleImageMax(1200, 1200, true)
-            ->setCompressionQuality(100)
-            ->stripAll()
-        ;
+            ->setCompressionQuality(100);
 
         static::assertNotEquals(file_get_contents($this->getImageFixtureBasePath().'public-hero-fixed-background.jpeg'), $m2->getBlob());
     }
@@ -166,15 +172,16 @@ class ImageMagickTest extends AbstractMantleKernelTestCase
         $m = $this->getM();
 
         $m
-            ->readImageIn($this->getImageFixturePath1(), ImageMagick::READ_METHOD_FILE_PATH, null)
-            ->setFormat('png')
-            ->flattenAndRemoveAlphaAndRgb()
-            ->createThumbnail(400)
-            ->stripAll()
-        ;
+            ->readFile($this->getImageFixturePath1(), null)
+            ->convertFormat('png')
+            ->removeAlpha()
+            ->removeLayers()
+            ->removeMeta()
+            ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
+            ->createThumbnail(400);
 
         $m->getBlob();
-        static::assertEquals(7450, $m->getFileSize());
+        static::assertEquals(7459, $m->getFileSize());
         static::assertEquals('png', $m->getFormat());
         static::assertEquals([400, 400], $m->getGeometry());
     }

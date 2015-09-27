@@ -295,7 +295,9 @@ class ImageMagick implements ImageMagickInterface
             $newX = $newY / $y * $x;
         }
 
-        $this->imagick->resizeImage($newX, $newY, $filter, 0.88549061701764, $bestFit);
+        $this
+            ->imagick
+            ->resizeImage($newX, $newY, $filter, 0.88549061701764, $bestFit);
 
         return $this;
     }
@@ -329,13 +331,13 @@ class ImageMagick implements ImageMagickInterface
 
         $this
             ->imagick
-            ->cropImage($newX, $newY, $cropX, $cropY)
-        ;
+            ->cropImage($newX, $newY, $cropX, $cropY);
 
         $this
             ->imagick
-            ->setImagePage($newX, $newY, 0, 0)
-        ;
+            ->setImagePage($newX, $newY, 0, 0);
+
+        $this->scaleImageMax($geometry, $geometry);
 
         return $this;
     }
@@ -347,8 +349,7 @@ class ImageMagick implements ImageMagickInterface
     {
         return $this
             ->imagick
-            ->getImageBlob()
-        ;
+            ->getImageBlob();
     }
 
     /**
@@ -358,8 +359,7 @@ class ImageMagick implements ImageMagickInterface
     {
         return $this
             ->imagick
-            ->getImageLength()
-        ;
+            ->getImageLength();
     }
 
     /**
@@ -369,8 +369,7 @@ class ImageMagick implements ImageMagickInterface
     {
         return $this
             ->imagick
-            ->getImageFormat()
-        ;
+            ->getImageFormat();
     }
 
     /**
@@ -386,7 +385,9 @@ class ImageMagick implements ImageMagickInterface
      */
     public function __destruct()
     {
-        $this->imagick->destroy();
+        $this
+            ->imagick
+            ->destroy();
     }
 }
 

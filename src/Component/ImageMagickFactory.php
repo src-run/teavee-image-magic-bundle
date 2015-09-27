@@ -24,3 +24,5 @@ class ImageMagickFactory
         return (new ImageMagick())->init();
     }
 }
+
+/* EOF */

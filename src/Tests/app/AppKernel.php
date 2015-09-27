@@ -27,19 +27,11 @@ class AppKernel extends Kernel
         $bundles = [
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new \Scribe\CacheBundle\ScribeCacheBundle(),
-            new \Scribe\MantleBundle\ScribeMantleBundle(),
+            new \Scribe\WonkaBundle\ScribeWonkaBundle(),
             new \Scribe\MagickBundle\ScribeMagickBundle(),
-            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
         }
 

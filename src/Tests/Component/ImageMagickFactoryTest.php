@@ -11,12 +11,12 @@
 
 namespace Scribe\MagickBundle\Tests\Component;
 
-use Scribe\Utility\UnitTest\AbstractMantleKernelTestCase;
+use Scribe\WonkaBundle\Utility\TestCase\KernelTestCase;
 
 /**
  * Class ImageMagickFactoryTest.
  */
-class ImageMagickFactoryTest extends AbstractMantleKernelTestCase
+class ImageMagickFactoryTest extends KernelTestCase
 {
     public function testFactoryReturnedInstance()
     {

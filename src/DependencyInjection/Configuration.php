@@ -11,22 +11,13 @@
 
 namespace Scribe\MagickBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Scribe\WonkaBundle\Component\DependencyInjection\AbstractConfiguration;
 
 /**
  * Class Configuration.
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function getConfigTreeBuilder()
-    {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('scribe_magick');
-
-        return $treeBuilder;
-    }
 }
+
+/* EOF */
