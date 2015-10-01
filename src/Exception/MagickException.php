@@ -11,9 +11,11 @@
 
 namespace Scribe\MagickBundle\Exception;
 
+use Scribe\Wonka\Exception\Exception;
+
 /**
  * MagickException class
  */
-class MagickException extends \ImagickException {}
+class MagickException extends \Exception {}
 
 /* EOF */

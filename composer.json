@@ -22,8 +22,8 @@
         }
     ],
     "require": {
-        "php"                          : ">=5.6.4,~5.6",
-      "ext-imagick"                    : ">=3.3.0RC1",
+        "php"                          : ">=5.6.4,~5.6|~7.0",
+        "ext-imagick"                  : ">=3.3.0",
         "scribe/wonka-library"         : "~0.1@dev",
         "scribe/wonka-bundle"          : "~0.1@dev"
     },

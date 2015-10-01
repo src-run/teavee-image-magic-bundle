@@ -82,7 +82,7 @@ class ImageMagickTest extends KernelTestCase
             ->removeMeta()
             ->convertColorspace(ImageMagick::COLORSPACE_SRGB)
             ->createThumbnail(300);
-
+            
         static::assertEquals(file_get_contents($this->getImageThumbnailFixturePath1()), $m->getBlob());
     }
 
@@ -147,7 +147,7 @@ class ImageMagickTest extends KernelTestCase
             ->setCompressionQuality(50);
 
         static::assertEquals(file_get_contents($this->getImageFixtureBasePath().'public-hero-fixed-background.jpeg'), $m->getBlob());
-        static::assertEquals(41546, $m->getFileSize());
+        static::assertEquals(41401, $m->getFileSize());
         static::assertEquals('jpeg', $m->getFormat());
         static::assertEquals([1198, 617], $m->getGeometry());
         static::assertEquals([300, 300], $m->getResolution());
