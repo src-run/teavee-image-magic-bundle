@@ -1,5 +1,5 @@
 {
-    "name"        : "scribe/magick-bundle",
+    "name"        : "scr-be/magick-bundle",
     "license"     : "MIT",
     "type"        : "project",
     "homepage"    : "https://wonka-bundle.oss.scr.be/home",
@@ -24,23 +24,19 @@
     "require": {
         "php"                          : ">=5.6.4,~5.6|~7.0",
         "ext-imagick"                  : ">=3.3.0",
-        "scribe/wonka-library"         : "~0.1@dev",
-        "scribe/wonka-bundle"          : "~0.1@dev"
+        "scr-be/wonka-bundle"          : "~0.2"
     },
     "require-dev" : {
-        "symfony/symfony"             : "~2.7|~2.8@dev",
-        "symfony/monolog-bundle"      : "~2.7|~2.8@dev",
-        "symfony/stopwatch"           : "~2.7|~2.8@dev",
-        "symfony/var-dumper"          : "~2.7|~2.8@dev",
-        "symfony/debug-bundle"        : "~2.7|~2.8@dev",
-        "symfony/phpunit-bridge"      : "~2.7|~2.8@dev",
-        "phpunit/phpunit"             : "~4.6",
-        "sensiolabs/security-checker" : "~3.0",
-        "scrutinizer/ocular"          : "~1.1",
-        "satooshi/php-coveralls"      : "~0.6",
-        "chriskite/phactory"          : "~0.4",
-        "sami/sami"                   : "~3.0",
-        "nikic/php-parser"            : ">=1.0,<1.2"
+        "symfony/symfony"             : "~2.8|~3.0",
+        "symfony/monolog-bundle"      : "~2.8|~3.0",
+        "symfony/stopwatch"           : "~2.8|~3.0",
+        "symfony/var-dumper"          : "~2.8|~3.0",
+        "symfony/debug-bundle"        : "~2.8|~3.0",
+        "symfony/phpunit-bridge"      : "~2.8|~3.0",
+        "phpunit/phpunit"             : "~5.0",
+        "codacy/coverage"             : "~1.0",
+        "satooshi/php-coveralls"      : "~0.7",
+        "chriskite/phactory"          : "~0.4"
     },
     "conflict" : {
         "scribe/mantle-bundle" : "<2.1"
@@ -50,14 +46,14 @@
             "Scribe\\MagickBundle\\" : "src/"
         }
     },
-    "config" : {
-        "bin-dir"           : "bin",
-        "preferred-install" : "auto",
-        "minimum-stability" : "dev"
+    "minimum-stability" : "dev",
+    "prefer-stable"     : true,
+    "config": {
+        "bin-dir" : "bin"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1-dev"
+            "dev-master": "2.2-dev"
         }
     }
 }

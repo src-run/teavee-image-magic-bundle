@@ -13,9 +13,9 @@ services :
     s.magick.instance:
         class     : %s.magick.instance.class%
         arguments :
-            - @service_container
+            - '@service_container'
         factory :
-            - @s.magick.factory
+            - '@s.magick.factory'
             - get
 
     s.magick.factory :

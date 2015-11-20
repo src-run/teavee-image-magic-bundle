@@ -1,7 +1,54 @@
+#
+# Scribe Inc.
+# General-purpose PHP GitIgnore File
+#
+
+# Symfony 2
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+
+# Symfony 3
+/var/cache/*
+/var/logs/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+
+# Symfony/Silex/Other Parameter Files
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Composer-created Directories
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
 /vendor/
-/docs/_build/
+!bin/.gitkeep
+composer.lock
+
+# Generated Assets
+/web/bundles/
+/web/uploads/
+/web/css/
+/web/js/
+/web/compiled
+
+# PHPUnit (Non-Dist)
+/phpunit.xml
+
+# Build data
+build/
+!build/.gitkeep
+
+# IDEA Directories
 /.idea/
-atlassian-ide-plugin.xml
-*.DS_Store*
-*.rb
-tags
+
+# Scribe-Specific
+/app/config/sami.php
+/config/
+
+# Remember to Use *.md Variants
+LICENSE
+README
+
+# EOF

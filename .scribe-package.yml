@@ -1,0 +1,9 @@
+api_branch  : origin/master
+api_parser  : ~
+api_cfgmod  : clone
+api_runner  : ~
+api_paths   : lib
+phpincs_req : timezone
+phpexts_req : igbinary,imagick
+syspkgs_req : imagemagick
+ci_send_req : coveralls,codacycoverage
