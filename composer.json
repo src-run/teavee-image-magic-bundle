@@ -11,7 +11,7 @@
         "irc"    : "irc://irc.efnet.org/scribe"
     },
     "keywords"    : [
-        "image-magic-bundle", "scribe-image-magic-bundle", "magick", "imagick", "imagemagick", "symfony", "scribe"
+        "teavee-image-magic-bundle", "scribe-image-magic-bundle", "magick", "imagick", "imagemagick", "symfony", "scribe"
     ],
     "authors"     : [
         {
