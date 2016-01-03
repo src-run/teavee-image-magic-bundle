@@ -1,7 +1,17 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__.'/../app/config/shared_public/tests/bootstrap/includes/constants.php';
+/*
+ * This file is part of the Teavee Image Magic Bundle.
+ *
+ * (c) Scribe Inc.     <scr@src.run>
+ * (c) Rob Frawley 2nd <rmf@src.run>
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
+require_once __DIR__.'/../.config/testers/bootstrap/includes/constants.php';
 
 umask(TEST_BS_FILE_CONSOLE_APP_UMASK);
 set_time_limit(TEST_BS_FILE_CONSOLE_APP_EXEC_LIMIT);

@@ -1,16 +1,19 @@
 ---
 
-framework:
-    secret:          "Secret for tests!"
-    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
-    session:         ~
-    default_locale:  en
-    translator:      { fallback: en }
-    profiler:        { only_exceptions: false }
+#
+# This file is part of the Teavee Image Magic Bundle.
+#
+# (c) Scribe Inc.     <scr@src.run>
+# (c) Rob Frawley 2nd <rmf@src.run>
+#
+#
+# For the full copyright and license information, please view the LICENSE.md
+# file that was distributed with this source code.
+#
 
-monolog:
-    handlers:
-        main:
-             type: "null"
+imports:
+    - { resource: ../../../.config/testers/symfony/config/base.yml }
+    - { resource: ../../../.config/testers/symfony/config/framework.yml }
+    - { resource: ../../../.config/testers/symfony/config/monolog.yml }
 
 ...

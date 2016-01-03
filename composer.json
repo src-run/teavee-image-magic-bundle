@@ -1,17 +1,17 @@
 {
-    "name"        : "scr-be/magick-bundle",
+    "name"        : "scr-be/teavee-image-magic-bundle",
     "license"     : "MIT",
     "type"        : "project",
-    "homepage"    : "https://wonka-bundle.oss.scr.be/home",
-    "description" : "Simple abstraction layer over PHP's IMagick library.",
+    "homepage"    : "https://scr.be/arthur-doctrine-fixtures-bundle",
+    "description" : "A simple abstraction on the IMagick extension.",
     "support" : {
         "email"  : "rmf@scr.be",
-        "issues" : "https://wonka-bundle.oss.scr.be/issues",
-        "source" : "https://wonka-bundle.oss.scr.be/git",
+        "issues" : "https://scr.be/arthur-doctrine-fixtures-bundle/issues",
+        "source" : "https://scr.be/arthur-doctrine-fixtures-bundle/git",
         "irc"    : "irc://irc.efnet.org/scribe"
     },
     "keywords"    : [
-        "magick-bundle", "scribe-magick-bundle", "magick", "imagick", "imagemagick", "symfony", "scribe", "scribenet"
+        "image-magic-bundle", "scribe-image-magic-bundle", "magick", "imagick", "imagemagick", "symfony", "scribe"
     ],
     "authors"     : [
         {
@@ -23,7 +23,7 @@
     ],
     "require": {
         "php"                          : ">=5.6.4,~5.6|~7.0",
-        "scr-be/wonka-bundle"          : "~0.2"
+        "scr-be/wonka-bundle"          : "~0.3"
     },
     "require-dev" : {
         "symfony/symfony"             : "~2.8|~3.0",
@@ -34,18 +34,22 @@
         "symfony/phpunit-bridge"      : "~2.8|~3.0",
         "phpunit/phpunit"             : "~5.0",
         "codacy/coverage"             : "~1.0",
-        "satooshi/php-coveralls"      : "~0.7",
-        "chriskite/phactory"          : "~0.4"
+        "satooshi/php-coveralls"      : "~1.0"
     },
     "suggest" : {
         "ext-imagick" : ">=3.3.0"
     },
     "conflict" : {
-        "scribe/mantle-bundle" : "<2.1"
+        "scribe/mantle-bundle" : "<2.4"
     },
     "autoload" : {
         "psr-4" : {
-            "Scribe\\MagickBundle\\" : "src/"
+            "Scribe\\Teavee\\ImageMagicBundle\\" : "src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
+            "Scribe\\Teavee\\ImageMagicBundle\\Tests\\" : "tests/"
         }
     },
     "minimum-stability" : "dev",
@@ -55,7 +59,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev"
+            "dev-master": "2.4-dev"
         }
     }
 }

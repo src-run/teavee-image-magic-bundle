@@ -1,24 +1,39 @@
 ---
 
+#
+# This file is part of the Teavee Image Magic Bundle.
+#
+# (c) Scribe Inc.     <scr@src.run>
+# (c) Rob Frawley 2nd <rmf@src.run>
+#
+#
+# For the full copyright and license information, please view the LICENSE.md
+# file that was distributed with this source code.
+#
+
 parameters :
 
-    s.magick.instance.class : Scribe\MagickBundle\Component\ImageMagick
-    s.magick.factory.class  : Scribe\MagickBundle\Component\ImageMagickFactory
+    s.teavee_image_magic.processor_image_magick.class : Scribe\Teavee\ImageMagicBundle\Processor\ImageMagick\ImageMagickProcessor
+    s.teavee_image_magic.processor_factory.class      : Scribe\Teavee\ImageMagicBundle\Factory\ProcessorFactory
 
 services :
 
+    s.image_processor :
+        alias : s.teavee_image_magic.processor_factory
+
     s.magick :
-        alias : s.magick.instance
+        alias : s.teavee_image_magic.processor_factory
 
-    s.magick.instance:
-        class     : %s.magick.instance.class%
+    s.teavee_image_magic.processor_image_magick:
+        class : '%s.teavee_image_magic.processor_image_magick.class%'
+
+    s.teavee_image_magic.processor_factory :
+        class     : %s.teavee_image_magic.processor_factory.class%
         arguments :
-            - '@service_container'
+            - '@s.wonka.utility.service_finder'
+            - 's.teavee_image_magic.processor_image_magick'
         factory :
-            - '@s.magick.factory'
-            - get
-
-    s.magick.factory :
-        class : %s.magick.factory.class%
+            - '%s.teavee_image_magic.processor_factory.class%'
+            - getProcessor
 
 ...

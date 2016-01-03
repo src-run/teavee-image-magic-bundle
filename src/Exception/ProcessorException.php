@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Scribe Magick Bundle.
+ * This file is part of the Teavee Image Magic Bundle.
  *
  * (c) Scribe Inc. <https://scr.be/>
  *
@@ -9,13 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Scribe\MagickBundle\Exception;
+namespace Scribe\Teavee\ImageMagicBundle\Exception;
 
 use Scribe\Wonka\Exception\Exception;
 
 /**
- * MagickException class
+ * Class ProcessorException.
  */
-class MagickException extends \Exception {}
+class ProcessorException extends Exception
+{
+}
 
 /* EOF */

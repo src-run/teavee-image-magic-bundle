@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Scribe Magick Bundle.
+ * This file is part of the Teavee Image Magic Bundle.
  *
  * (c) Scribe Inc. <https://scr.be/>
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Scribe\MagickBundle;
+namespace Scribe\Teavee\ImageMagicBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ScribeMagickBundle.
+ * Class ScribeTeaveeImageMagicBundle.
  */
-class ScribeMagickBundle extends Bundle
+class ScribeTeaveeImageMagicBundle extends Bundle
 {
 }
 

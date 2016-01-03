@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Scribe Magick Bundle.
+ * This file is part of the Teavee Image Magic Bundle.
  *
  * (c) Scribe Inc. <https://scr.be/>
  *
@@ -28,7 +28,7 @@ class AppKernel extends Kernel
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Scribe\WonkaBundle\ScribeWonkaBundle(),
-            new \Scribe\MagickBundle\ScribeMagickBundle(),
+            new \Scribe\Teavee\ImageMagicBundle\ScribeTeaveeImageMagicBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

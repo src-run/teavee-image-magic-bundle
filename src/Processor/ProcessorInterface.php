@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Scribe\Teavee\ImageMagicBundle\DependencyInjection;
-
-use Scribe\WonkaBundle\Component\DependencyInjection\AbstractConfiguration;
+namespace Scribe\Teavee\ImageMagicBundle\Processor;
 
 /**
- * Class Configuration.
+ * Class ProcessorInterface.
  */
-class Configuration extends AbstractConfiguration
+interface ProcessorInterface
 {
 }
 

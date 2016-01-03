@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Scribe Magick Bundle.
+ * This file is part of the Teavee Image Magic Bundle.
  *
  * (c) Scribe Inc. <https://scr.be/>
  *
@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Scribe\MagickBundle\Tests;
+namespace Scribe\Teavee\ImageMagicBundle\Tests;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
-use Scribe\MagickBundle\ScribeMagickBundle;
+use Scribe\Teavee\ImageMagicBundle\ScribeTeaveeImageMagicBundle;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ScribeMagickBundleTest.
+ * Class ScribeTeaveeImageMagicBundleTest.
  */
-class ScribeMagickBundleTest extends PHPUnit_Framework_TestCase
+class ScribeTeaveeImageMagicBundleTest extends PHPUnit_Framework_TestCase
 {
-    const FULLY_QUALIFIED_CLASS_NAME = 'Scribe\MagickBundle\ScribeMagickBundle';
+    const FULLY_QUALIFIED_CLASS_NAME = 'Scribe\Teavee\ImageMagicBundle\ScribeTeaveeImageMagicBundle';
 
     /**
      * @var ContainerInterface
@@ -38,7 +38,7 @@ class ScribeMagickBundleTest extends PHPUnit_Framework_TestCase
 
     public function getNewBundle()
     {
-        return new ScribeMagickBundle();
+        return new ScribeTeaveeImageMagicBundle();
     }
 
     public function getReflection()
@@ -53,7 +53,7 @@ class ScribeMagickBundleTest extends PHPUnit_Framework_TestCase
 
     public function testCanAccessContainerServices()
     {
-        static::assertTrue($this->container->has('s.magick'));
+        static::assertTrue($this->container->has('s.image_processor'));
     }
 }
 
