@@ -3,7 +3,7 @@
     "license"     : "MIT",
     "type"        : "project",
     "homepage"    : "https://scr.be/arthur-doctrine-fixtures-bundle",
-    "description" : "A simple abstraction on the IMagick extension.",
+    "description" : "A simple abstraction image handlers, currently using the IMagick extension.",
     "support" : {
         "email"  : "rmf@scr.be",
         "issues" : "https://scr.be/arthur-doctrine-fixtures-bundle/issues",
